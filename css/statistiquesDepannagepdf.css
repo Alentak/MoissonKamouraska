@@ -1,0 +1,27 @@
+header {
+    display: none;
+}
+
+table {
+    width: 100% !important;
+}
+
+.thead-dark th {
+    background-color: #343a40 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+p {
+    width: 38%;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+span {
+    font-size: 30px;
+}
+
+#btnExportTab {
+    display: none !important;;
+}

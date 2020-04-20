@@ -1,0 +1,46 @@
+header {
+    height: 100px;
+    margin-top: 5px;
+}
+
+header div {
+    height: 100px;
+    text-align: center;
+}
+
+header img {
+    float: left;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-right: 260px;
+}
+
+@media only screen and (max-width: 1280px) {
+    h1 {
+        font-size: 40px;
+    }
+}
+
+table {
+    width: 85% !important;
+    margin: auto !important;
+    margin-top : 30px !important;
+}
+
+table td,th {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+#Date {
+    width: 200px !important;
+    margin : auto;
+}
+
+#Poids {
+    width : 100px !important;
+    margin : auto;
+}

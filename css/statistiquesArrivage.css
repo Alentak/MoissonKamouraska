@@ -1,0 +1,89 @@
+header {
+    margin-top: 5px;
+    height: 100px;
+}
+
+header div {
+    height: 100px;
+    text-align: center;
+}
+
+header img {
+    float: left;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-right: 110px;
+    display: inline;
+}   
+
+@media only screen and (max-width: 1280px) {
+    h1 {
+        font-size: 40px;
+    }
+}
+
+#btnOption {
+    height: 50px;
+    width: 100px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 50px;
+    font-size: 20px !important;
+}
+
+#chartContainer {
+    width: 50%;
+    height: 500px;
+    margin: auto;
+}
+
+table {
+    width: 90% !important;
+    margin: auto !important;
+}
+
+#printChart {
+    margin-left : 25%;
+    display : none;
+    margin-bottom: 25px;
+}
+
+#capt {
+    text-align: right;
+    font-size: 1.1em;
+    margin-right: 45px;
+}
+
+th,td {
+    text-align: center;
+}
+
+p {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+#dateSelect {
+    margin-left: 25px;
+}
+
+#groupeSelect,#dateSelect {
+    font-size: 30px;
+}
+
+#btnExportChart {
+    margin-left : 25%;
+    margin-bottom : 100px;
+    display: none;
+}
+
+#btnExportTab {
+    margin-bottom: 100px;
+    margin-left : 7.5%;
+    display: none;
+}

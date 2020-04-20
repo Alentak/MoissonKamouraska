@@ -1,0 +1,49 @@
+header {
+    height: 100px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+header div {
+    height: 100px;
+    text-align: center;
+}
+
+header img {
+    float: left;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-right: 260px;
+}
+
+@media only screen and (max-width: 1280px) {
+    h1 {
+        font-size: 40px;
+    }
+}
+
+h2{
+    text-align: center;
+    padding: 20px;
+}
+
+form{
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+hr{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+input[type="submit"]
+{
+    margin: auto;
+    display: block;
+    padding: 15px 20px 15px 20px;
+}

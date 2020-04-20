@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/bootstrap.min.css" />
+    <link href="lib/fontawesome-5.7.2/css/fontawesome.min.css" rel="stylesheet">
+    <link href="lib/fontawesome-5.7.2/css/brands.min.css" rel="stylesheet">
+    <link href="lib/fontawesome-5.7.2/css/solid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/arrivage.css">
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="js/arrivage.js"></script>
+    <title>Arrivage</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html"><img src="img/Logo_MoissonKam.png" alt="logo"></a>
+            <h1>Arrivage</h1>
+        </div>
+    </header>
+    <table id="tabArriv" class="table">
+        <caption id="capt">
+            <label id="pdsTotal">Poids Total : 0</label>
+            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <label id="prixTotal">Prix Total : 0</label>
+        </caption>
+        <thead class="thead-dark">
+            <tr>
+                <th>Type</th>
+                <th>DLC</th>
+                <th>Nb Produit</th>
+                <th>Poids Unitaire</th>
+                <th>Poids</th>
+                <th>Prix</th>
+                <th>Ajout</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <form id="lotForm">
+                    <td class="produit">
+                        <select id="nomProduit" class="form-control">
+                        </select>
+                        <i id="ajoutProduit" class="fas fa-plus-circle fa-2x" data-toggle="modal"
+                            data-target="#produitModal"></i>
+                        <i id="modifProduit" class="fas fa-edit fa-2x" data-toggle="modal"
+                            data-target="#produitModal"></i>
+                    </td>
+                    <td>
+                        <input type="date" id="DLCProduit" class="form-control" required>
+                    </td>
+                    <td>
+                        <input type="number" id="nbProduit" class="form-control" min="1" required>
+                    </td>
+                    <td>
+                        <input type="number" step="0.01" id="PUProduit" class="form-control" min="0.01" required>
+                    </td>
+                    <td id="PoidsProduit">0</td>
+                    <td id="PrixProduit">$0</td>
+                    <td>
+                        <button type="submit" id="btnValider">
+                            <i id="ajoutTab" class="fas fa-plus-circle fa-2x"></i>
+                        </button>
+                    </td>
+                </form>
+            </tr>
+        </tfoot>
+    </table>
+
+    <form id="soumettreForm">
+        <div id="choixGroupeDate">
+            <select class="form-control" id="listeGroupe">
+                <option id="none" selected disabled>Destinataire</option>
+            </select>
+            <i id="ajoutGroupe" class="fas fa-plus-circle fa-2x" data-toggle="modal" data-target="#groupeModal"></i>
+            <i id="modifGroupe" class="fas fa-edit fa-2x" data-toggle="modal" data-target="#groupeModal"></i>
+            <input type="date" class="form-control" id="dateArrivage" required>
+            <br />
+        </div>
+        <button type="submit" id="soumettre" class="btn btn-dark">Valider</button>
+    </form>
+
+    <div class="modal fade" id="produitModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                </div>
+                <form id="produitModalForm">
+                    <div class="modal-body">
+                        <label for="nomProduitModal">Nom : </label>
+                        <input type="text" id="nomProduitModal" class="form-control" maxlength="38" required>
+                        <label for="PUProduitModal">Prix Unitaire : </label>
+                        <input type="number" step="0.01" id="PUProduitModal" min="0.01" class="form-control" required>
+                        <label for="P1Produit">Priorité Haute : </label>
+                        <input type="number" id="P1Produit" step="0.01" min="0.01" max="100" class="form-control"
+                            required>
+                        <label for="P2Produit">Priorité Moyenne : </label>
+                        <input type="number" id="P2Produit" class="form-control" step="0.01" min="0.01" max="100"
+                            required>
+                        <label for="P3Produit">Priorité Petite : </label>
+                        <input type="number" step="0.01" min="0.01" max="100" id="P3Produit" class="form-control"
+                            required>
+                        <label for="PMoisson">Pourcentage Moisson : </label>
+                        <input type="number" id="PMoisson" step="0.01" min="0.01" max="100" class="form-control"
+                            required>
+                        <label for="nbJourAlerte">Nombre de jours avant alerte : </label>
+                        <input type="number" id="nbJourAlerte" min="1" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="validerProduitModal" class="btn btn-primary"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="groupeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                </div>
+                <form id="groupeModalForm">
+                    <div class="modal-body">
+                        <label for="nomGroupe">Nom : </label>
+                        <input type="text" id="nomGroupe" class="form-control" maxlength="38" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="validerGroupeModal" class="btn btn-primary"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="validationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <span id="validationTextModal"></span>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnFermer" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

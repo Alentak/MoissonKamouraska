@@ -1,0 +1,48 @@
+header {
+    display: none;
+}
+
+#chartContainer { 
+    margin :  25px !important;
+}
+
+table {
+    width: 100% !important;
+}
+
+.thead-dark th {
+    background-color: #343a40 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+
+#printChart {
+    display: none !important;
+}
+
+p {
+    width: 52%;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+#dateSelect {
+    margin-left: 25px;
+}
+
+span {
+    font-size: 30px;
+}
+
+#btnExportChart {
+    display: none !important;;
+}
+
+#btnExportTab {
+    display: none !important;;
+}
+
+#sautDePage {
+    page-break-before : always;
+}

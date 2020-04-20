@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/UrgenceSurplus.css">
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="js/UrgenceSurplus.js"></script>
+    <title>Urgence</title>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="index.html"><img src="img/Logo_MoissonKam.png" alt="logo"></a>
+            <h1>Urgence / Surplus</h1>
+        </div>
+    </header>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Poids</th>
+                <th>Ajouter</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form id="UrgenceSurplusForm">
+                    <td>
+                        <select id="typeDistrib" class="form-control">
+                            <option value="U">Urgence</option>
+                            <option value="S">Surplus</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="date" id="Date" class="form-control" required>
+                    </td>
+                    <td>
+                        <input type="number" step="0.01" id="Poids" class="form-control" min="0.01" required>
+                    </td>
+                    <td>
+                        <button type="submit" id="btnValider" class="btn btn-primary">Ajouter</button>
+                    </td>
+                </form>
+            </tr>            
+        </tbody>
+    </table>
+    
+    <div class="modal fade" id="validationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <span id="validationTextModal"></span>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnFermer" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

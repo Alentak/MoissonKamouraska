@@ -1,0 +1,109 @@
+header {
+    height: 100px;
+    margin-top: 5px;
+}
+
+header div {
+    height: 100px;
+    text-align: center;
+}
+
+header img {
+    float: left;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-right: 260px;
+}
+
+@media only screen and (max-width: 1280px) {
+    h1 {
+        font-size: 40px;
+    }
+}
+
+table {
+  width: 90% !important;
+  margin: auto !important;
+  margin-top : 20px !important;
+}
+
+table td,th {
+    text-align: center !important;
+}
+
+tfoot tr:first-child * {
+    vertical-align : middle;
+}
+
+#nbProduit, #PUProduit {
+    width : 100px !important;
+    margin : auto;
+}
+
+#capt {
+    text-align: right;
+    font-size: 1.1em;
+    margin-right: 45px;
+}
+
+#DLCProduit {
+    width: 150px !important;
+    margin : auto;
+}
+
+.fa-trash-alt {
+color: rgb(255, 0, 0);
+}
+
+#choixGroupeDate .form-control {
+    margin-left: 150px;
+    width: 200px !important;
+    display: inline !important;
+}
+
+#soumettre {
+    width: 150px;
+    height: 60px;
+    font-size: 1.7em;
+    margin-left:30%;
+    margin-top:80px;
+}
+
+#modalPU {
+    width: 40%;
+    display: inline !important;
+}
+
+#nomProduit{
+    display: inline !important;
+    width:60%;
+}
+
+.fa-plus-circle {
+    color: rgb(72, 174, 18);
+}
+
+#ajoutProduit,#modifProduit,#ajoutGroupe, #modifGroupe {
+    margin-left: 20px;
+}
+
+#choixGroupeDate > * {
+    vertical-align: middle;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+#btnValider {
+    background: none;
+    padding: 0px;
+    border: none;
+}
+
+.produit {
+    width: 35%;
+}

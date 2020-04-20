@@ -1,0 +1,43 @@
+header {
+    height: 100px;
+    margin-top: 5px;
+}
+
+header div {
+    height: 100px;
+    text-align: center;
+}
+
+header img {
+    float: left;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-right: 260px;
+}
+
+@media only screen and (max-width: 1280px) {
+    h1 {
+        font-size: 40px;
+    }
+}
+ 
+ #tabInv td,th {
+    text-align: center
+}
+
+.pastille {
+    width : 25px;
+    height : 25px;
+}
+
+.gauche {
+    text-align: right;
+}
+
+table {
+    width: 95% !important;
+    margin : auto !important;
+}
