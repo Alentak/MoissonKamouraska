@@ -23,56 +23,96 @@
         </div>
     </header>
 
+    <?php
+        if(isset($_GET["erreur"]))
+        {
+            if($_GET["erreur"] == 1)
+            {
+                ?>
+                <div class="container">
+                    <div class="alert alert-danger" role="alert">
+                        Vous devez remplir tout les champs obligatoire.
+                    </div>
+                </div>
+            <?php
+            }
+            else if($_GET["erreur"] == 2)
+            {
+                ?>
+                <div class="container">
+                    <div class="alert alert-danger" role="alert">
+                        Un champs est manquant sur une des personnes autres que vous voulez entrer.
+                    </div>
+                </div>
+            <?php
+            }
+        }
+        else if(isset($_GET["success"]))
+        {
+            if($_GET["success"] == 1)
+            {
+                ?>
+                <div class="container">
+                    <div class="alert alert-success" role="alert">
+                        L'ajout est un succès !
+                    </div>
+                </div>
+            <?php
+            }
+        }
+
+    ?>
+
     <div class="container">
         <form method="POST" action="php/ajoutClient.php">
             <h2>Fiche d'inscription</h2>
             <div class="form-group row">
                 <label for="inputDate" class="col-md-1 col-form-label">Date</label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" id="inputDate" name="donnees[date]" required autocomplete="off">
+                    <input type="date" class="form-control" id="inputDate" name="donnees[date]" autocomplete="off" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputNomBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Nom du bénéficiaire</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="inputNomBeneficiaire" name="donnees[nomBeneficiaire]" required autocomplete="off">
+                    <input type="text" class="form-control" id="inputNomBeneficiaire" name="donnees[nomBeneficiaire]" autocomplete="off" required>
                 </div>
 
                 <label for="inputPrenomBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Prénom</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="inputPrenomBeneficiaire" name="donnees[prenomBeneficiaire]" required autocomplete="off">
+                    <input type="text" class="form-control" id="inputPrenomBeneficiaire" name="donnees[prenomBeneficiaire]" autocomplete="off" required>
                 </div>
 
                 <label for="inputAgeBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Age</label>
                 <div class="col-md-3">
-                    <input type="number" min="0" class="form-control" id="inputAgeBeneficiaire" name="donnees[ageBeneficiaire]" required autocomplete="off">
+                    <input type="number" min="0" class="form-control" id="inputAgeBeneficiaire" name="donnees[ageBeneficiaire]" autocomplete="off" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputAdresse" class="col-md-1 col-form-label">Adresse</label>
                 <div class="col-md-11">
-                    <input type="text" class="form-control" id="inputAdresse" name="donnees[adresse]" required autocomplete="off">
+                    <input type="text" class="form-control" id="inputAdresse" name="donnees[adresse]" autocomplete="off" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputVille" class="col-md-1 col-form-label">Ville</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="inputVille" name="donnees[ville]" required autocomplete="off">
+                    <input type="text" class="form-control" id="inputVille" name="donnees[ville]" autocomplete="off" required>
                 </div>
 
                 <label for="inputCodePostal" class="col-md-2 col-form-label">Code postal</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="inputCodePostal" name="donnees[codePostal]" required autocomplete="off">
+                    <input type="text" class="form-control" id="inputCodePostal" name="donnees[codePostal]" autocomplete="off" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputTel" class="col-md-1 col-form-label">Téléphone</label>
                 <div class="col-md-6">
-                    <input type="tel" class="form-control" id="inputVille" pattern="[0-9]{3}-[0-9]{3}- [0-9]{4}" name="donnees[tel]" required autocomplete="off">
+                    <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}- [0-9]{4}" id="inputVille" name="donnees[tel]" autocomplete="off" required>
                 </div>
             </div>
 
@@ -86,22 +126,22 @@
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="nomPrenomAutre1" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre1[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="nomPrenomAutre2" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre2[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="nomPrenomAutre3" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre3[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="nomPrenomAutre4" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre4[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -114,22 +154,22 @@
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="ddnAutre1" required autocomplete="off">
+                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre1[ddn]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="ddnAutre2" required autocomplete="off">
+                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre2[ddn]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="ddnAutre3" required autocomplete="off">
+                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre3[ddn]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="ddnAutre4" required autocomplete="off">
+                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre4[ddn]" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -140,22 +180,22 @@
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="lienAutre1" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre1[lien]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="lienAutre2" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre2[lien]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="lienAutre3" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre3[lien]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="lienAutre4" required autocomplete="off">
+                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre4[lien]" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -166,18 +206,18 @@
             <div class="form-group row">
                 <label for="inputNbAdulte" class="col-md-2 col-form-label font-weight-bold">Nombre d'adulte</label>
                 <div class="col-md-2">
-                    <input type="number" class="form-control" id="inputNbAdulte" name="donnees[nombreAdulte]" required autocomplete="off">
+                    <input type="number" class="form-control" id="inputNbAdulte" name="donnees[nombreAdulte]" autocomplete="off" required>
                 </div>
 
                 <label for="inputNbEnfant" class="col-md-2 col-form-label font-weight-bold">Nombre d'enfant</label>
                 <div class="col-md-2">
-                    <input type="number" class="form-control" id="inputNbEnfant" name="donnees[nombreEnfant]" required autocomplete="off">
+                    <input type="number" class="form-control" id="inputNbEnfant" name="donnees[nombreEnfant]" autocomplete="off" required>
                 </div>
 
                 <label for="inputTypeFamille" class="col-md-2 col-form-label font-weight-bold">Taille de la
                     famille</label>
                 <div class="col-md-2">
-                    <select class="form-control" name="donnees[tailleFamille]" required autocomplete="off">
+                    <select class="form-control" name="donnees[tailleFamille]" autocomplete="off" required>
                         <option>Petite famille</option>
                         <option>Moyenne famille</option>
                         <option>Grande famille</option>
@@ -195,43 +235,43 @@
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Aide sociale</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[aideSociale]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[aideSociale]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Chômage / CSST</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[chomageCSST]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[chomageCSST]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Prêts et bourses</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[pretBourse]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[pretBourse]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Pension</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[pension]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[pension]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Autres</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[revenusAutres]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[revenusAutres]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Total</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[revenusTotal]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[revenusTotal]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Référé par</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[referePar]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[refererPar]" autocomplete="off" required>
                         </div>
                     </div>
                 </div>
@@ -244,38 +284,38 @@
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Loyer</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[loyer]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[loyer]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Electricité /
                             chauffage</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[electriciteChauffage]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[electriciteChauffage]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Assurances</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[assurances]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[assurances]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Téléphone</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[telDepense]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[telDepense]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Autres</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[depensesAutres]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[depensesAutres]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Total</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[depensesTotal]" required autocomplete="off">
+                            <input type="text" class="form-control" id="inputAideSociale" name="donnees[depensesTotal]" autocomplete="off" required>
                         </div>
                     </div>
                 </div>
@@ -287,13 +327,13 @@
                         <p>Avez-vous de l'aide alimentaire d'autres organismes du milieu ?</p>
                     </div>
                     <div class="col-md-1">
-                        <input class="form-check-input" type="radio" id="AideAlimentaire1" value="option1" name="donnees[AideAlimentaire]" required autocomplete="off">
+                        <input class="form-check-input" type="radio" id="AideAlimentaire1" value="1" name="donnees[AideAlimentaire]" autocomplete="off" required>
                         <label class="form-check-label" for="AideAlimentaire1">
                             Oui
                         </label>
                     </div>
                     <div class="col-md-1">
-                        <input class="form-check-input" type="radio" id="AideAlimentaire2" value="option2" name="donnees[AideAlimentaire]" required autocomplete="off">
+                        <input class="form-check-input" type="radio" id="AideAlimentaire2" value="0" name="donnees[AideAlimentaire]" autocomplete="off" required>
                         <label class="form-check-label" for="AideAlimentaire2">
                             Non
                         </label>
@@ -307,13 +347,13 @@
                         <p>Intéressé(e) à être bénévole ?</p>
                     </div>
                     <div class="col-md-1">
-                        <input class="form-check-input" type="radio" id="Benevole1" value="option1" name="donnees[Benevole]" required autocomplete="off">
+                        <input class="form-check-input" type="radio" id="Benevole1" value="1" name="donnees[Benevole]" autocomplete="off" required>
                         <label class="form-check-label" for="Benevole1">
                             Oui
                         </label>
                     </div>
                     <div class="col-md-1">
-                        <input class="form-check-input" type="radio" id="Benevole2" value="option2" name="donnees[Benevole]" required autocomplete="off">
+                        <input class="form-check-input" type="radio" id="Benevole2" value="0" name="donnees[Benevole]" autocomplete="off" required>
                         <label class="form-check-label" for="Benevole2">
                             Non
                         </label>
@@ -341,7 +381,7 @@
             <div class="form-group row">
                 <div class="col-md-6">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inputSignAccept" value="option1" name="donnees[signature]" required autocomplete="off">
+                        <input class="form-check-input" type="checkbox" id="inputSignAccept" value="1" name="donnees[signature]" autocomplete="off" required>
                         <label class="form-check-label" for="inputSignAccept">J'accepte</label>
                     </div>
                 </div>
@@ -349,7 +389,7 @@
                     <div class="row">
                         <label for="inputDateAccept" class="col-md-2 col-form-label">Date</label>
                         <div class="col-md-4">
-                            <input type="date" class="form-control" id="inputDateAccept" name="donnees[dateSignature]" required autocomplete="off">
+                            <input type="date" class="form-control" id="inputDateAccept" name="donnees[dateSignature]" autocomplete="off" required>
                         </div>
                     </div>
                 </div>

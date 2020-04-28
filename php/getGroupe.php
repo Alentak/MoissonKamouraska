@@ -1,7 +1,8 @@
 <?php
     //Récupération de la liste des groupes
 
-    include_once('classConnexionBD.php');  
+    include_once('classConnexionBD.php');
+    
 
     $connection = ConnexionBD::getConnexion();
 

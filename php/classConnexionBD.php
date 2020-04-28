@@ -1,6 +1,10 @@
 <?php
     //Classe permettant la connexion à la base de données
 
+    include_once('classe/client.php');
+    include_once('classe/clientAutre.php');
+
+
     class ConnexionBD
     {
         private static $bdHost = 'localhost';
