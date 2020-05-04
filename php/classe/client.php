@@ -20,6 +20,7 @@ class Client{
     private $_AideSociale;
     private $_Chomage;
     private $_PretBourse;
+    private $_Pension;
     private $_RevenusAutres;
     private $_RevenusTotal;
     private $_Reference;
@@ -52,7 +53,7 @@ class Client{
     }
 
     
-    public function __construct($date, $nomBeneficicaire, $prenomBeneficiaire, $ageBeneficiaire, $adresse, $ville, $codePostal, $tel, $nombreAdulte, $nombreEnfant, $tailleFamille, $aideSociale, $chomage, $pretBourse, $revenusAutres, $revenusTotal, $reference, $loyer, $electricite, $assurance, $depensesTel, $depensesAutres, $depensesTotal, $aideAlimentaire, $benevolat, $signature, $dateSignature)
+    public function __construct($date, $nomBeneficicaire, $prenomBeneficiaire, $ageBeneficiaire, $adresse, $ville, $codePostal, $tel, $nombreAdulte, $nombreEnfant, $tailleFamille, $aideSociale, $chomage, $pretBourse, $pension, $revenusAutres, $revenusTotal, $reference, $loyer, $electricite, $assurance, $depensesTel, $depensesAutres, $depensesTotal, $aideAlimentaire, $benevolat, $signature, $dateSignature)
     {
         $this->__set("_Date", $date);
         $this->__set("_NomBeneficicaire", $nomBeneficicaire);
@@ -68,6 +69,7 @@ class Client{
         $this->__set("_AideSociale", $aideSociale);
         $this->__set("_Chomage", $chomage);
         $this->__set("_PretBourse", $pretBourse);
+        $this->__set("_Pension", $pension);
         $this->__set("_RevenusAutres", $revenusAutres);
         $this->__set("_RevenusTotal", $revenusTotal);
         $this->__set("_Reference", $reference);

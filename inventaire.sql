@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 28 avr. 2020 à 03:11
+-- Généré le :  lun. 04 mai 2020 à 03:36
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.3.5
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `t_client` (
   `CLI_AGE` int(5) NOT NULL,
   `CLI_ADRESSE` varchar(100) COLLATE latin1_bin NOT NULL,
   `CLI_VILLE` varchar(50) COLLATE latin1_bin NOT NULL,
-  `CLI_CP` int(5) NOT NULL,
+  `CLI_CP` varchar(10) COLLATE latin1_bin NOT NULL,
   `CLI_TEL` varchar(50) COLLATE latin1_bin NOT NULL,
   `CLI_NBADULTE` int(5) NOT NULL,
   `CLI_NBENFANT` int(5) NOT NULL,
@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `t_client` (
   `CLI_AIDESOC` int(10) NOT NULL,
   `CLI_CHOMAGE` int(10) NOT NULL,
   `CLI_PRETBOURSE` int(10) NOT NULL,
+  `CLI_PENSION` int(10) NOT NULL,
   `CLI_REVENUSAUTRES` int(10) NOT NULL,
   `CLI_REVENUSTOTAL` int(10) NOT NULL,
   `CLI_REFERENCE` varchar(50) COLLATE latin1_bin NOT NULL,
@@ -57,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `t_client` (
   `CLI_AIDEALIM` tinyint(1) NOT NULL,
   `CLI_BENEVOLAT` tinyint(1) NOT NULL,
   `CLI_SIGNATURE` tinyint(1) NOT NULL,
-  `CLI_DATESIGN` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CLI_DATESIGN` date NOT NULL,
   PRIMARY KEY (`CLI_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -65,10 +66,10 @@ CREATE TABLE IF NOT EXISTS `t_client` (
 -- Déchargement des données de la table `t_client`
 --
 
-INSERT INTO `t_client` (`CLI_ID`, `CLI_DATE`, `CLI_NOM`, `CLI_PRENOM`, `CLI_AGE`, `CLI_ADRESSE`, `CLI_VILLE`, `CLI_CP`, `CLI_TEL`, `CLI_NBADULTE`, `CLI_NBENFANT`, `CLI_TAILLEFAMILLE`, `CLI_AIDESOC`, `CLI_CHOMAGE`, `CLI_PRETBOURSE`, `CLI_REVENUSAUTRES`, `CLI_REVENUSTOTAL`, `CLI_REFERENCE`, `CLI_LOYER`, `CLI_ELEC`, `CLI_ASSURANCE`, `CLI_DEPTEL`, `CLI_DEPAUTRE`, `CLI_DEPTOTAL`, `CLI_AIDEALIM`, `CLI_BENEVOLAT`, `CLI_SIGNATURE`, `CLI_DATESIGN`) VALUES
-(15, '2020-04-01', 'Tasquier', 'Eléna', 20, 'La Closerie Place de l\'Europe', 'Saint Martin du Manoir', 76290, '0695203282', 2, 1, 2, 1, 1, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 0, 1, 1, '0000-00-00 00:00:00'),
-(16, '2020-04-01', 'Tasquier', 'Eléna', 21, 'La Closerie Place de l\'Europe', 'Saint Martin du Manoir', 76290, '0695203282', 2, 3, 5, 1, 1, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 0, 1, 1, '0000-00-00 00:00:00'),
-(17, '2020-04-09', 'Tasquier', 'Eléna', 22, 'La Closerie Place de l\'Europe', 'Saint Martin du Manoir', 76290, '0695203282', 2, 5, 7, 1, 1, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 0, 1, 1, '0000-00-00 00:00:00');
+INSERT INTO `t_client` (`CLI_ID`, `CLI_DATE`, `CLI_NOM`, `CLI_PRENOM`, `CLI_AGE`, `CLI_ADRESSE`, `CLI_VILLE`, `CLI_CP`, `CLI_TEL`, `CLI_NBADULTE`, `CLI_NBENFANT`, `CLI_TAILLEFAMILLE`, `CLI_AIDESOC`, `CLI_CHOMAGE`, `CLI_PRETBOURSE`, `CLI_PENSION`, `CLI_REVENUSAUTRES`, `CLI_REVENUSTOTAL`, `CLI_REFERENCE`, `CLI_LOYER`, `CLI_ELEC`, `CLI_ASSURANCE`, `CLI_DEPTEL`, `CLI_DEPAUTRE`, `CLI_DEPTOTAL`, `CLI_AIDEALIM`, `CLI_BENEVOLAT`, `CLI_SIGNATURE`, `CLI_DATESIGN`) VALUES
+(15, '2020-04-01', 'Tasquier', 'Eléna', 20, 'La Closerie Place de l\'Europe', 'Saint Martin du Manoir', '76290', '0695203282', 2, 1, 2, 1, 1, 1, 0, 1, 1, '1', 1, 1, 1, 1, 1, 1, 0, 1, 1, '2020-05-03'),
+(16, '2020-04-01', 'Tasquier', 'Eléna', 21, 'La Closerie Place de l\'Europe', 'Saint Martin du Manoir', '76290', '0695203282', 2, 3, 5, 1, 1, 1, 0, 1, 1, '1', 1, 1, 1, 1, 1, 1, 0, 1, 1, '2020-05-03'),
+(17, '2020-04-09', 'Tasquier', 'Eléna', 22, 'La Closerie Place de l\'Europe', 'Saint Martin du Manoir', '76290', '0695203282', 2, 5, 7, 1, 1, 1, 0, 1, 1, '1', 1, 1, 1, 1, 1, 1, 0, 1, 1, '2020-05-03');
 
 -- --------------------------------------------------------
 
