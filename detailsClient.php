@@ -2,18 +2,12 @@
 include 'php/classConnexionBD.php';
 
 $db = ConnexionBD::getConnexion();
-$leClient;
-if(isset($_GET["cid"]) && $_GET["cid"] != null){
-    $id = $_GET["cid"];
-    $leClient = $db->query("SELECT * FROM t_client WHERE CLI_ID = $id");
 
-    //TODO verif du GET
-    //
-    //
-    //
-    //
-    //
-    //
+$leClient;
+if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_GET["cid"] > 0){
+    $id = $_GET["cid"];
+    //Récup le client sur lequel l'utilisateur a cliqué
+    $leClient = $db->query("SELECT * FROM t_client WHERE CLI_ID = $id")->fetch();
 }else{
     header('location:listeModifClient.php');
 }
@@ -38,12 +32,11 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null){
     <header>
         <div>
             <a href="index.html"><img src="img/Logo_MoissonKam.png" alt="logo"></a>
-            <h1>Détails sur le client</h1>
         </div>
     </header>
     <div class="container">
         <form method="POST" action="php/ajoutClient.php">
-            <h2>Fiche d'inscription</h2>
+            <h2>Détails sur le client</h2>
             <div class="form-group row">
                 <label for="inputDate" class="col-md-1 col-form-label">Date</label>
                 <div class="col-md-3">

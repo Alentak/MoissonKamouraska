@@ -112,7 +112,7 @@
             <div class="form-group row">
                 <label for="inputTel" class="col-md-1 col-form-label">Téléphone</label>
                 <div class="col-md-6">
-                    <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}- [0-9]{4}" id="inputVille" name="donnees[tel]" autocomplete="off" required>
+                    <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="inputVille" name="donnees[tel]" autocomplete="off" required>
                 </div>
             </div>
 
