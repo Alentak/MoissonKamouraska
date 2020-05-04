@@ -1,71 +1,42 @@
+<?php
+include 'php/classConnexionBD.php';
+
+$db = ConnexionBD::getConnexion();
+
+$leClient;
+if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_GET["cid"] > 0){
+    $id = $_GET["cid"];
+    //Récup le client sur lequel l'utilisateur a cliqué
+    $leClient = $db->query("SELECT * FROM t_client WHERE CLI_ID = $id")->fetch();
+}else{
+    header('location:listeModifClient.php');
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="lib/bootstrap.min.css" />
-    <link href="lib/fontawesome-5.7.2/css/fontawesome.min.css" rel="stylesheet">
-    <link href="lib/fontawesome-5.7.2/css/brands.min.css" rel="stylesheet">
-    <link href="lib/fontawesome-5.7.2/css/solid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/listeModifClient.css">
     <link rel="stylesheet" href="css/ajoutClient.css">
     <script src="lib/jquery-3.3.1.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
-    <title>Ajout Client</title>
+    <title>Client - Détails</title>
 </head>
 
 <body>
     <header>
         <div>
             <a href="index.html"><img src="img/Logo_MoissonKam.png" alt="logo"></a>
-            <h1>Ajout client</h1>
         </div>
     </header>
-
-    <?php
-        if(isset($_GET["erreur"]))
-        {
-            if($_GET["erreur"] == 1)
-            {
-                ?>
-                <div class="container">
-                    <div class="alert alert-danger" role="alert">
-                        Vous devez remplir tout les champs obligatoire.
-                    </div>
-                </div>
-            <?php
-            }
-            else if($_GET["erreur"] == 2)
-            {
-                ?>
-                <div class="container">
-                    <div class="alert alert-danger" role="alert">
-                        Un champs est manquant sur une des personnes autres que vous voulez entrer.
-                    </div>
-                </div>
-            <?php
-            }
-        }
-        else if(isset($_GET["success"]))
-        {
-            if($_GET["success"] == 1)
-            {
-                ?>
-                <div class="container">
-                    <div class="alert alert-success" role="alert">
-                        L'ajout est un succès !
-                    </div>
-                </div>
-            <?php
-            }
-        }
-
-    ?>
-
     <div class="container">
         <form method="POST" action="php/ajoutClient.php">
-            <h2>Fiche d'inscription</h2>
+            <h2>Détails sur le client</h2>
             <div class="form-group row">
                 <label for="inputDate" class="col-md-1 col-form-label">Date</label>
                 <div class="col-md-3">
@@ -76,7 +47,7 @@
             <div class="form-group row">
                 <label for="inputNomBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Nom du bénéficiaire</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="inputNomBeneficiaire" name="donnees[nomBeneficiaire]" autocomplete="off" required>
+                    <input type="text" value="<?= isset($leClient) ? $leClient["CLI_NOM"] : "" ?>" class="form-control" id="inputNomBeneficiaire" name="donnees[nomBeneficiaire]" autocomplete="off" required>
                 </div>
 
                 <label for="inputPrenomBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Prénom</label>
@@ -112,7 +83,7 @@
             <div class="form-group row">
                 <label for="inputTel" class="col-md-1 col-form-label">Téléphone</label>
                 <div class="col-md-6">
-                    <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="inputVille" name="donnees[tel]" autocomplete="off" required>
+                    <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}- [0-9]{4}" id="inputVille" name="donnees[tel]" autocomplete="off" required>
                 </div>
             </div>
 
@@ -365,15 +336,15 @@
                 <div class="col-md">
                     <p><span class="font-weight-bold">Par cette signature, je confirme que les renseignements fournis sont exacts.</span><br>
 
-                    Je suis informé que la loi protège l'organisme de distribution alimentaine, ainsi que Moisson Kamouraska et ses fournisseurs, de toute réclamation ou poursuite judiciaire. (Loi du bon samaritain) <br>
+                        Je suis informé que la loi protège l'organisme de distribution alimentaine, ainsi que Moisson Kamouraska et ses fournisseurs, de toute réclamation ou poursuite judiciaire. (Loi du bon samaritain) <br>
 
-                    <span class="font-weight-bold">Par la présente, j'autorise la divulgation d'informations entre mon intervenant et Moisson Kamouraska. <br>
+                        <span class="font-weight-bold">Par la présente, j'autorise la divulgation d'informations entre mon intervenant et Moisson Kamouraska. <br>
 
-                    Si besoin, j'accepte que Moisson Kamouraska renouvelle mon accès à l'Epicerie Sociale. <br>
+                            Si besoin, j'accepte que Moisson Kamouraska renouvelle mon accès à l'Epicerie Sociale. <br>
 
-                    Je m'engage à respecter les règlements établis par Moisson Kamouraska. Exemple : La non-revente des denrées, avoir des sacs réutilisables et échanger dans le respect et la bonne humeur. <br>
+                            Je m'engage à respecter les règlements établis par Moisson Kamouraska. Exemple : La non-revente des denrées, avoir des sacs réutilisables et échanger dans le respect et la bonne humeur. <br>
 
-                    Advenant le cas du non-respect, en tout temps Moisson Kamouraska peut mettre fin à mon aide.</span>
+                            Advenant le cas du non-respect, en tout temps Moisson Kamouraska peut mettre fin à mon aide.</span>
                     </p>
                 </div>
             </div>
@@ -394,14 +365,11 @@
                     </div>
                 </div>
             </div>
-            
-                <input type="submit" class="btn btn-dark" value="Valider" name="Valider">
+
+            <input type="submit" class="btn btn-dark" value="Valider" name="Valider">
 
         </form>
     </div>
-
-
-
 </body>
 
 </html>

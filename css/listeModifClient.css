@@ -1,0 +1,38 @@
+header {
+    height: 100px;
+    margin-top: 5px;
+}
+
+header div {
+    height: 100px;
+    text-align: center;
+}
+
+header img {
+    float: left;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-right: 260px;
+}
+table{
+    width: 95% !important;
+    margin: auto !important;
+}
+td, th{
+    text-align: center;
+}
+td>button{
+    background: none;
+    padding: 0;
+    border: none;
+    color: rgb(72, 174, 18);
+}
+
+@media only screen and (max-width: 1280px) {
+    h1 {
+        font-size: 40px;
+    }
+}
