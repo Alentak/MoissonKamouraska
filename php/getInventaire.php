@@ -8,12 +8,12 @@ $ListeProduit = array();
 
 //Ordre de selection de tout les groupes a qui on peut faire une distribution
 
-$selectGroup = $bdd->query('SELECT GRO_ID, GRO_LIBELLE,PRI_ID, MRC_ID from t_groupe WHERE PRI_ID IS NOT NULL');
+$selectGroup = $bdd->query('SELECT CLI_ID, CLI_NOM, CLI_PRENOM, CLI_TAILLEFAMILLE FROM t_client ORDER BY CLI_NOM');
 
 $ListeProduit[0] = array();
 
 while ($dataGroupe = $selectGroup->fetch()) {
-    $ListeProduit[0][] = array("GRO_ID" => $dataGroupe['GRO_ID'], "GRO_LIBELLE" => $dataGroupe['GRO_LIBELLE'], "PRI_ID" => $dataGroupe['PRI_ID'], "MRC_ID" => $dataGroupe['MRC_ID']);
+    $ListeProduit[0][] = array("CLI_ID" => $dataGroupe['CLI_ID'], "CLI_NOM" => $dataGroupe['CLI_NOM'], "CLI_PRENOM" => $dataGroupe['CLI_PRENOM'], "CLI_TAILLEFAMILLE" => $dataGroupe['CLI_TAILLEFAMILLE']);
 }
 $selectGroup->closeCursor();
 

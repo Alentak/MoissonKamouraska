@@ -38,7 +38,7 @@ $(document).ready(function () {
             PrioG = 0;
             pourcent = 0;
             i = 0;
-            while (i < jObjInventaire[0].length && jObjInventaire[0][i].GRO_ID != idG) {
+            while (i < jObjInventaire[0].length && jObjInventaire[0][i].CLI_ID != idG) {
                 i++;
             }
             PrioG = jObjInventaire[0][i].PRI_ID;
@@ -109,7 +109,18 @@ $(document).ready(function () {
         $('#Groupe').empty();
 
         for (let index = 0; index < jObjInventaire[0].length; index++) {
-            $('#Groupe').append('<option value="' + jObjInventaire[0][index].GRO_ID + '">' + jObjInventaire[0][index].GRO_LIBELLE + '</option>')
+
+            tailleFamille = jObjInventaire[0][index].CLI_TAILLEFAMILLE;
+
+            if(tailleFamille == 1)
+                tailleFamille = "Petite famille";
+                else if(tailleFamille == 2)
+                    tailleFamille = "Moyenne famille";
+                        else
+                            tailleFamille = "Grande famille";
+
+
+            $('#Groupe').append('<option value="' + jObjInventaire[0][index].CLI_ID + '">' + jObjInventaire[0][index].CLI_NOM + " " + jObjInventaire[0][index].CLI_PRENOM + " / " + tailleFamille + '</option>')
         }
     }
 
@@ -281,7 +292,7 @@ $(document).ready(function () {
                         nbSaisi = 0;
                     }
                     //Ordre d'insertion dans l'historique
-                    SqlOrdre2 = "insert into t_historique(TPR_ID,GRO_ID,HIS_PoidsUnitaire,HIS_DLC,HIS_NbProduit,HIS_TypeEchange,HIS_Date) VALUES(" + idProd + "," + $("#Groupe").val() + "," + Lignes[compteur].LOT_POIDSUNITAIRE + ",'" + Lignes[compteur].LOT_DLC + "'," + nbTemporaire + ",'D','" + $("#dateDistri").val() + "')";
+                    SqlOrdre2 = "insert into t_historique(TPR_ID,CLI_ID,HIS_PoidsUnitaire,HIS_DLC,HIS_NbProduit,HIS_TypeEchange,HIS_Date) VALUES(" + idProd + "," + $("#Groupe").val() + "," + Lignes[compteur].LOT_POIDSUNITAIRE + ",'" + Lignes[compteur].LOT_DLC + "'," + nbTemporaire + ",'D','" + $("#dateDistri").val() + "')";
 
                     //On push les ordres
                     jObjOrdre.push(SqlOrdre1);
@@ -325,7 +336,7 @@ $(document).ready(function () {
         $('#validerGroupeModal').text("Modifier");
 
         i = 0;
-        while (i < jObjInventaire[0].length && jObjInventaire[0][i].GRO_ID != $("#Groupe option:selected").val()) {
+        while (i < jObjInventaire[0].length && jObjInventaire[0][i].CLI_ID != $("#Groupe option:selected").val()) {
             i++;
         }
 
@@ -358,10 +369,10 @@ $(document).ready(function () {
             index = $('#Groupe').prop('selectedIndex');
 
             i = 0;
-            while (i < jObjInventaire[0].length && jObjInventaire[0][i].GRO_LIBELLE != $('#Groupe option:selected').text()) {
+            while (i < jObjInventaire[0].length && jObjInventaire[0][i].CLI_NOM != $('#Groupe option:selected').text()) {
                 i++;
             }
-            IDGroupe = jObjInventaire[0][i].GRO_ID;
+            IDGroupe = jObjInventaire[0][i].CLI_ID;
 
             $.post(
                 'php/setGroupe.php',
