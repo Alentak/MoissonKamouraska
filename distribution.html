@@ -66,11 +66,11 @@
 
         <form id="soumettreForm">
             <div id="groupeDate">
+                <label for="Groupe">Pour quel client cette commande est-elle destinée ? </label>
                 <select class="form-control" id="Groupe">
-                    <option id="none" selected disabled>Destinataire</option>
+                    <option id="none" selected disabled>Client</option>
                 </select>
-                <i id="ajoutGroupe" class="fas fa-plus-circle fa-2x" data-toggle="modal" data-target="#groupeModal"></i>
-                <i id="modifGroupe" class="fas fa-edit fa-2x" data-toggle="modal" data-target="#groupeModal"></i>
+                <a href="ajoutClient.php"><i class="fas fa-plus-circle fa-2x"></i></a>
                 <input type="date"  class="form-control" id="dateDistri" required>
                 <br/>
             </div>

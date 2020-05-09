@@ -123,6 +123,18 @@ class Client{
         $requete->execute();
 
     }
+
+
+    public static function SelectClient()
+    {
+        $connection = ConnexionBD::getConnexion();
+
+        $requete = $connection->query("SELECT `CLI_ID`, `CLI_PRENOM`, `CLI_NOM` FROM t_client");
+
+        $resultat = $requete->fetchAll();
+
+        return $resultat;
+    }
 }
 
 ?>

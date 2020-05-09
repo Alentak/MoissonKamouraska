@@ -218,9 +218,9 @@
                     famille</label>
                 <div class="col-md-2">
                     <select class="form-control" name="donnees[tailleFamille]" autocomplete="off" required>
-                        <option>Petite famille</option>
-                        <option>Moyenne famille</option>
-                        <option>Grande famille</option>
+                        <option value="1">Petite famille</option>
+                        <option value="2">Moyenne famille</option>
+                        <option value="3">Grande famille</option>
                     </select>
                 </div>
             </div>
