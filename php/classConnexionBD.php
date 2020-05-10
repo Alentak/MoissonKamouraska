@@ -10,7 +10,7 @@
         private static $bdHost = 'localhost';
         private static $bdName = 'inventaire';
         private static $bdUsername = 'root';
-        private static $bdPassword = 'P@ssw0rd123';
+        private static $bdPassword = 'P@ssw0rd';
 
         public static $connection;
 

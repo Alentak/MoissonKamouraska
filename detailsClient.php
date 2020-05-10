@@ -44,7 +44,7 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
             <div class="form-group row">
                 <label for="inputDate" class="col-md-1 col-form-label">Date</label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" id="inputDate" name="donnees[date]" autocomplete="off" required>
+                    <input type="date" value="<?= date('Y-m-d', strtotime($leClient["CLI_DATE"])); ?>" class="form-control" id="inputDate" name="donnees[date]" autocomplete="off" required>
                 </div>
             </div>
 
@@ -193,9 +193,9 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
                     famille</label>
                 <div class="col-md-2">
                     <select class="form-control" name="donnees[tailleFamille]" autocomplete="off" required>
-                        <option>Petite famille</option>
-                        <option>Moyenne famille</option>
-                        <option>Grande famille</option>
+                        <option value="1">Petite famille</option>
+                        <option value="2">Moyenne famille</option>
+                        <option value="3">Grande famille</option>
                     </select>
                 </div>
             </div>

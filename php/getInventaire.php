@@ -8,14 +8,14 @@ $ListeProduit = array();
 
 //Ordre de selection de tout les groupes a qui on peut faire une distribution
 
-$selectGroup = $bdd->query('SELECT CLI_ID, CLI_NOM, CLI_PRENOM, CLI_TAILLEFAMILLE FROM t_client ORDER BY CLI_NOM');
+$selectClient = $bdd->query('SELECT CLI_ID, CLI_NOM, CLI_PRENOM, CLI_TAILLEFAMILLE FROM t_client ORDER BY CLI_NOM');
 
 $ListeProduit[0] = array();
 
-while ($dataGroupe = $selectGroup->fetch()) {
+while ($dataGroupe = $selectClient->fetch()) {
     $ListeProduit[0][] = array("CLI_ID" => $dataGroupe['CLI_ID'], "CLI_NOM" => $dataGroupe['CLI_NOM'], "CLI_PRENOM" => $dataGroupe['CLI_PRENOM'], "CLI_TAILLEFAMILLE" => $dataGroupe['CLI_TAILLEFAMILLE']);
 }
-$selectGroup->closeCursor();
+$selectClient->closeCursor();
 
 $ListeProduit[1] = array();
 

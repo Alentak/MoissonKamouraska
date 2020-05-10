@@ -90,7 +90,7 @@ class Client{
     {
         $connection = ConnexionBD::getConnexion();
 
-        $requete = $connection->prepare("INSERT INTO `t_client` (`CLI_DATE`, `CLI_NOM`, `CLI_PRENOM`, `CLI_AGE`, `CLI_ADRESSE`, `CLI_VILLE`, `CLI_CP`, `CLI_TEL`, `CLI_NBADULTE`, `CLI_NBENFANT`, `CLI_TAILLEFAMILLE`, `CLI_AIDESOC`, `CLI_CHOMAGE`, `CLI_PRETBOURSE`, `CLI_REVENUSAUTRES`, `CLI_REVENUSTOTAL`, `CLI_REFERENCE`, `CLI_LOYER`, `CLI_ELEC`, `CLI_ASSURANCE`, `CLI_DEPTEL`, `CLI_DEPAUTRE`, `CLI_DEPTOTAL`, `CLI_AIDEALIM`, `CLI_BENEVOLAT`, `CLI_SIGNATURE`, `CLI_DATESIGN`) value(:date, :nomBeneficiaire, :prenomBeneficiaire, :ageBeneficiaire, :adresse, :ville, :codePostal, :tel, :nombreAdulte, :nombreEnfant, :tailleFamille, :aideSociale, :chomage, :pretBourse, :revenusAutres, :revenusTotal, :reference, :loyer, :electricite, :assurance, :depensesTel, :depensesAutres, :depensesTotal, :aideAlimentaire, :benevolat, :signature, :dateSignature)");
+        $requete = $connection->prepare("INSERT INTO `t_client` (`CLI_DATE`, `CLI_NOM`, `CLI_PRENOM`, `CLI_AGE`, `CLI_ADRESSE`, `CLI_VILLE`, `CLI_CP`, `CLI_TEL`, `CLI_NBADULTE`, `CLI_NBENFANT`, `CLI_TAILLEFAMILLE`, `CLI_AIDESOC`, `CLI_CHOMAGE`, `CLI_PRETBOURSE`, `CLI_PENSION`, `CLI_REVENUSAUTRES`, `CLI_REVENUSTOTAL`, `CLI_REFERENCE`, `CLI_LOYER`, `CLI_ELEC`, `CLI_ASSURANCE`, `CLI_DEPTEL`, `CLI_DEPAUTRE`, `CLI_DEPTOTAL`, `CLI_AIDEALIM`, `CLI_BENEVOLAT`, `CLI_SIGNATURE`, `CLI_DATESIGN`) value(:date, :nomBeneficiaire, :prenomBeneficiaire, :ageBeneficiaire, :adresse, :ville, :codePostal, :tel, :nombreAdulte, :nombreEnfant, :tailleFamille, :aideSociale, :chomage, :pretBourse, :pension, :revenusAutres, :revenusTotal, :reference, :loyer, :electricite, :assurance, :depensesTel, :depensesAutres, :depensesTotal, :aideAlimentaire, :benevolat, :signature, :dateSignature)");
 
         $requete->bindValue(":date", $this->_Date);
         $requete->bindValue(":nomBeneficiaire", $this->_NomBeneficicaire);
@@ -106,6 +106,7 @@ class Client{
         $requete->bindValue(":aideSociale", $this->_AideSociale);
         $requete->bindValue(":chomage", $this->_Chomage);
         $requete->bindValue(":pretBourse", $this->_PretBourse);
+        $requete->bindValue(":pension", $this->_Pension);
         $requete->bindValue(":revenusAutres", $this->_RevenusAutres);
         $requete->bindValue(":revenusTotal", $this->_RevenusTotal);
         $requete->bindValue(":reference", $this->_Reference);
@@ -121,6 +122,8 @@ class Client{
         $requete->bindValue(":dateSignature", $this->_DateSignature);
 
         $requete->execute();
+
+        var_dump($requete);
 
     }
 

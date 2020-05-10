@@ -40,20 +40,37 @@ $clients = $db->query("SELECT * FROM t_client");
         <tbody>
             <?php foreach ($clients as $client) : ?>
                 <tr>
-                    <td><?= $client["CLI_NOM"]. " ".$client["CLI_PRENOM"]?> <a href="detailsClient.php?cid=<?=$client["CLI_ID"]?>"> >  Détails</a></td>
+                    <td><?= $client["CLI_NOM"] . " " . $client["CLI_PRENOM"] ?> <a href="detailsClient.php?cid=<?= $client["CLI_ID"] ?>"> > Détails</a></td>
                     <td>
-                        <?php 
-                            $typeFamille = "Grande";
-                            if($client["CLI_TAILLEFAMILLE"] < 7)
-                                $typeFamille = "Moyenne";
-                            if($client["CLI_TAILLEFAMILLE"] < 5)
-                                $typeFamille = "Petite";
-                            echo $typeFamille;
+                        <?php
+                        $typeFamille = "Grande";
+                        if ($client["CLI_TAILLEFAMILLE"] == 2)
+                            $typeFamille = "Moyenne";
+                        else if ($client["CLI_TAILLEFAMILLE"] == 1)
+                            $typeFamille = "Petite";
+                        echo $typeFamille;
                         ?>
                     </td>
-                    <td><?= $client["CLI_DATE"]?> <button><i class="fas fa-plus-circle fa-2x"></i></button></td>
-                    <td><?= $client["CLI_AGE"]?></td>
-                    <td></td>
+                    <td><?= $client["CLI_DATE"] ?> <button><i class="fas fa-plus-circle fa-2x"></i></button></td>
+                    <td><?= $client["CLI_AGE"] ?></td>
+                    <td>
+                        <?php
+                        $now = time(); //Aujourd'hui
+                        $date = strtotime($client["CLI_DATE"]); //La date limite de distribution du client
+
+                        $datediff = round(($date - $now) / (60 * 60 * 24)); //Calcul du nombre de jours qui sépare les deux dates
+
+                        //Affichage de la réponse en fonction de la différence de jour
+                        if ($datediff < 0)
+                            echo "Dépassé";
+                        else if ($datediff <= 7)
+                            echo "<img src='img/prouge.png' width='30'>";
+                        else if ($datediff <= 14)
+                            echo "<img src='img/porange.png' width='30'>";
+                        else if ($datediff > 14)
+                            echo "<img src='img/pverte.png' width='30'>";
+                        ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
