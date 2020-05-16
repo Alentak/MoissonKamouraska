@@ -264,7 +264,6 @@ $(document).ready(function () {
                 nbLot = parseInt(nbLot, 10);
                 nbDLC = 0;
                 compteur = 1;
-                alert("bonjour");
 
                 //On veut générer les ordres sql en fonction du nombre saisit
                 //Il y a plusieurs lots différents, si on saisit un nombre inférieur à un lot il faut update, si il est égal il faut delete
@@ -292,9 +291,7 @@ $(document).ready(function () {
                         nbSaisi = 0;
                     }
                     //Ordre d'insertion dans l'historique
-                    SqlOrdre2 = "insert into t_historique(TPR_ID,CLI_ID,HIS_PoidsUnitaire,HIS_DLC,HIS_NbProduit,HIS_TypeEchange,HIS_Date) VALUES(" + idProd + "," + $("#Groupe").val() + "," + Lignes[compteur].LOT_POIDS + ",'" + Lignes[compteur].LOT_DLC + "'," + nbTemporaire + ",'D','" + $("#dateDistri").val() + "')";
-
-                    alert(SqlOrdre2);
+                    SqlOrdre2 = "insert into t_historique(TPR_ID,CLI_ID,HIS_PoidsUnitaire,HIS_DLC,HIS_NbProduit,HIS_TypeEchange,HIS_Date) VALUES(" + idProd + "," + $("#Groupe").val() + "," + Lignes[compteur].LOT_POIDS / parseInt(Lignes[0].NbProduit, 10) * nbTemporaire + ",'" + Lignes[compteur].LOT_DLC + "'," + nbTemporaire + ",'D','" + $("#dateDistri").val() + "')";
 
                     //On push les ordres
                     jObjOrdre.push(SqlOrdre1);
