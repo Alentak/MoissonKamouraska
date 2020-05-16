@@ -122,11 +122,7 @@ class Client{
         $requete->bindValue(":dateSignature", $this->_DateSignature);
 
         $requete->execute();
-
-        var_dump($requete);
-
     }
-
 
     public static function SelectClient()
     {
@@ -139,5 +135,4 @@ class Client{
         return $resultat;
     }
 }
-
 ?>

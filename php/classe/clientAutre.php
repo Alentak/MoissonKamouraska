@@ -38,7 +38,6 @@ class clientAutre
         return $resultat;
     }
 
-
     public function AjouterClientAutre($idClient)
     {
         $connection = ConnexionBD::getConnexion();
@@ -52,9 +51,5 @@ class clientAutre
 
         $requete->execute();
     }
-
 }
-
-
-
 ?>

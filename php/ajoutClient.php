@@ -47,7 +47,7 @@ if(isset($_POST['Valider']))
         $assurances = $tableau["assurances"];
         $telDepense = $tableau["telDepense"];
         $depensesAutres = $tableau["depensesAutres"];
-        $depensesTotal = $tableau["nomBeneficiaire"];
+        $depensesTotal = $tableau["depensesTotal"];
 
         //les btn radios ne sont pas présent s'ils n'ont pas été coché. Pk ? jsp
         
@@ -56,10 +56,6 @@ if(isset($_POST['Valider']))
         $signature = $tableau["signature"];
 
         $dateSignature = $tableau["dateSignature"];
-
-        echo "<pre>";
-        print_r($tableau);
-        echo "</pre>";
 
         $result1 = verifierClientAutre($clientAutre1);
         $result2 = verifierClientAutre($clientAutre2);
@@ -88,9 +84,7 @@ if(isset($_POST['Valider']))
             if($result4 == 1)
                 ajouterAutre($clientAutre4);
 
-
             header("Location: ../ajoutClient.php?success=1");
-
         }
     }
     else
@@ -98,7 +92,6 @@ if(isset($_POST['Valider']))
         header("Location: ../ajoutClient.php?erreur=1");
     }
 }
-
 
 function verifierClientAutre($tableau)
 {
@@ -140,8 +133,6 @@ function verifierClientAutre($tableau)
     }
 }
 
-
-
 function ajouterAutre($tableau)
 {
     $resultat = clientAutre::SelectDernierClient();
@@ -159,5 +150,4 @@ function ajouterAutre($tableau)
 
     $clientAutre->AjouterClientAutre($idClient);
 }
-
 ?>
