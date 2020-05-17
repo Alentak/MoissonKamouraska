@@ -51,7 +51,7 @@ $clients = $db->query("SELECT * FROM t_client");
                         echo $typeFamille;
                         ?>
                     </td>
-                    <td><?= $client["CLI_DATE"] ?> <button><i class="fas fa-plus-circle fa-2x"></i></button></td>
+                    <td><?= $client["CLI_DATE"] ?> <button></td>
                     <td><?= $client["CLI_AGE"] ?></td>
                     <td>
                         <?php
