@@ -15,7 +15,14 @@ if(isset($_POST['Valider']))
     
     foreach($tableau as $tab)
         if(empty($tab))
+        {
             $i = false;
+
+                if($tab == 0)
+                {
+                    $i = true;
+                }
+        }
 
     if($i == true)
     {
