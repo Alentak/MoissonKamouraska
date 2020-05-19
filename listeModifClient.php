@@ -27,6 +27,20 @@ $clients = $db->query("SELECT * FROM t_client");
             <h1>Liste et modification de clients</h1>
         </div>
     </header>
+    <?php
+    if(isset($_GET["success"]))
+    {
+        if($_GET["success"] == 1)
+        {
+            ?>
+            <div class="container">
+                <div class="alert alert-success" role="alert">
+                    Le client a bien été modifié !
+                </div>
+            </div>
+        <?php
+        }
+    }?>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>

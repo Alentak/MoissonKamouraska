@@ -4,15 +4,20 @@ include 'php/classConnexionBD.php';
 $db = ConnexionBD::getConnexion();
 
 $leClient;
-if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_GET["cid"] > 0){
+$clientsAutre = [];
+if (isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_GET["cid"] > 0) {
     $id = $_GET["cid"];
     //Récup le client sur lequel l'utilisateur a cliqué
     $leClient = $db->query("SELECT * FROM t_client WHERE CLI_ID = $id");
-    if ($leClient->rowCount() > 0)
+    if ($leClient->rowCount() > 0) {
         $leClient = $leClient->fetch();
-    else
+
+        //Récup les membres de la famille du client
+        $clientsAutre = $db->query("SELECT * FROM t_clientautre WHERE CLI_ID = $id");
+        $clientsAutre = $clientsAutre->fetchAll();
+    } else
         header('location:listeModifClient.php');
-}else{
+} else {
     header('location:listeModifClient.php');
 }
 ?>
@@ -38,8 +43,33 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
             <a href="index.html"><img src="img/Logo_MoissonKam.png" alt="logo"></a>
         </div>
     </header>
+    <?php
+        if(isset($_GET["erreur"]))
+        {
+            if($_GET["erreur"] == 1)
+            {
+                ?>
+                <div class="container">
+                    <div class="alert alert-danger" role="alert">
+                        Vous devez remplir tout les champs obligatoire.
+                    </div>
+                </div>
+            <?php
+            }
+            else if($_GET["erreur"] == 2)
+            {
+                ?>
+                <div class="container">
+                    <div class="alert alert-danger" role="alert">
+                        Un champs est manquant sur une des personnes autres que vous voulez entrer.
+                    </div>
+                </div>
+            <?php
+            }
+        }
+    ?>
     <div class="container">
-        <form method="POST" action="php/ajoutClient.php">
+        <form method="POST" action="php/modifDetailsClient.php?cid=<?=$id?>">
             <h2>Détails sur le client</h2>
             <div class="form-group row">
                 <label for="inputDate" class="col-md-1 col-form-label">Date</label>
@@ -51,43 +81,43 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
             <div class="form-group row">
                 <label for="inputNomBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Nom du bénéficiaire</label>
                 <div class="col-md-3">
-                    <input type="text" value="<?= $leClient["CLI_NOM"]?>" class="form-control" id="inputNomBeneficiaire" name="donnees[nomBeneficiaire]" autocomplete="off" required>
+                    <input type="text" value="<?= $leClient["CLI_NOM"] ?>" class="form-control" id="inputNomBeneficiaire" name="donnees[nomBeneficiaire]" autocomplete="off" required>
                 </div>
 
                 <label for="inputPrenomBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Prénom</label>
                 <div class="col-md-3">
-                    <input type="text" value="<?= $leClient["CLI_PRENOM"]?>" class="form-control" id="inputPrenomBeneficiaire" name="donnees[prenomBeneficiaire]" autocomplete="off" required>
+                    <input type="text" value="<?= $leClient["CLI_PRENOM"] ?>" class="form-control" id="inputPrenomBeneficiaire" name="donnees[prenomBeneficiaire]" autocomplete="off" required>
                 </div>
 
                 <label for="inputAgeBeneficiaire" class="col-md-1 col-form-label font-weight-bold">Age</label>
                 <div class="col-md-3">
-                    <input type="number" value="<?= $leClient["CLI_AGE"]?>" min="0" class="form-control" id="inputAgeBeneficiaire" name="donnees[ageBeneficiaire]" autocomplete="off" required>
+                    <input type="number" value="<?= $leClient["CLI_AGE"] ?>" min="0" class="form-control" id="inputAgeBeneficiaire" name="donnees[ageBeneficiaire]" autocomplete="off" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputAdresse" class="col-md-1 col-form-label">Adresse</label>
                 <div class="col-md-11">
-                    <input type="text" class="form-control" value="<?= $leClient["CLI_ADRESSE"]?>" id="inputAdresse" name="donnees[adresse]" autocomplete="off" required>
+                    <input type="text" class="form-control" value="<?= $leClient["CLI_ADRESSE"] ?>" id="inputAdresse" name="donnees[adresse]" autocomplete="off" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputVille" class="col-md-1 col-form-label">Ville</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" value="<?= $leClient["CLI_VILLE"]?>" id="inputVille" name="donnees[ville]" autocomplete="off" required>
+                    <input type="text" class="form-control" value="<?= $leClient["CLI_VILLE"] ?>" id="inputVille" name="donnees[ville]" autocomplete="off" required>
                 </div>
 
                 <label for="inputCodePostal" class="col-md-2 col-form-label">Code postal</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" value="<?= $leClient["CLI_CP"]?>" id="inputCodePostal" name="donnees[codePostal]" autocomplete="off" required>
+                    <input type="text" class="form-control" value="<?= $leClient["CLI_CP"] ?>" id="inputCodePostal" name="donnees[codePostal]" autocomplete="off" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputTel" class="col-md-1 col-form-label">Téléphone</label>
                 <div class="col-md-6">
-                    <input type="tel" class="form-control" value="<?= $leClient["CLI_TEL"]?>" id="inputVille" name="donnees[tel]" autocomplete="off" required>
+                    <input type="tel" class="form-control" value="<?= $leClient["CLI_TEL"] ?>" id="inputVille" name="donnees[tel]" autocomplete="off" required>
                 </div>
             </div>
 
@@ -101,76 +131,76 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre1[nomPrenom]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[0]) ? $clientsAutre[0]["CLIA_NOMPRENOM"] : "" ?>" id="inputNomPrenomAutre" name="autre1[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre2[nomPrenom]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[1]) ? $clientsAutre[1]["CLIA_NOMPRENOM"] : "" ?>" id="inputNomPrenomAutre" name="autre2[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre3[nomPrenom]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[2]) ? $clientsAutre[2]["CLIA_NOMPRENOM"] : "" ?>" id="inputNomPrenomAutre" name="autre3[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputNomPrenomAutre" name="autre4[nomPrenom]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[3]) ? $clientsAutre[3]["CLIA_NOMPRENOM"] : "" ?>" id="inputNomPrenomAutre" name="autre4[nomPrenom]" autocomplete="off">
                         </div>
                     </div>
                 </div>
 
 
-                <div class="col-md-2 mb-3">
+                <div class="col-md-3 mb-3">
                     <div class="row">
                         <label for="inputNomPrenomAutre" class="col-md-12 col-form-label font-weight-bold">Date de
                             naissance</label>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre1[ddn]" autocomplete="off">
+                            <input type="date" class="form-control mb-1" value="<?= isset($clientsAutre[0]) ? date('Y-m-d', strtotime($clientsAutre[0]["CLIA_DDN"])) : "" ?>" id="inputDDNAutre" name="autre1[ddn]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre2[ddn]" autocomplete="off">
+                            <input type="date" class="form-control mb-1" value="<?= isset($clientsAutre[1]) ? date('Y-m-d', strtotime($clientsAutre[1]["CLIA_DDN"])) : "" ?>" id="inputDDNAutre" name="autre2[ddn]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre3[ddn]" autocomplete="off">
+                            <input type="date" class="form-control mb-1" value="<?= isset($clientsAutre[2]) ? date('Y-m-d', strtotime($clientsAutre[2]["CLIA_DDN"])) : "" ?>" id="inputDDNAutre" name="autre3[ddn]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="date" class="form-control mb-1" id="inputDDNAutre" name="autre4[ddn]" autocomplete="off">
+                            <input type="date" class="form-control mb-1" value="<?= isset($clientsAutre[3]) ? date('Y-m-d', strtotime($clientsAutre[3]["CLIA_DDN"])) : "" ?>" id="inputDDNAutre" name="autre4[ddn]" autocomplete="off">
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <div class="row">
                         <label for="inputNomPrenomAutre" class="col-md-12 col-form-label font-weight-bold">Lien</label>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre1[lien]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[0]) ? $clientsAutre[0]["CLIA_LIEN"] : "" ?>" id="inputLienAutre" name="autre1[lien]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre2[lien]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[1]) ? $clientsAutre[1]["CLIA_LIEN"] : "" ?>" id="inputLienAutre" name="autre2[lien]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre3[lien]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[2]) ? $clientsAutre[2]["CLIA_LIEN"] : "" ?>" id="inputLienAutre" name="autre3[lien]" autocomplete="off">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <input type="text" class="form-control mb-1" id="inputLienAutre" name="autre4[lien]" autocomplete="off">
+                            <input type="text" class="form-control mb-1" value="<?= isset($clientsAutre[3]) ? $clientsAutre[3]["CLIA_LIEN"] : "" ?>" id="inputLienAutre" name="autre4[lien]" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -181,21 +211,21 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
             <div class="form-group row">
                 <label for="inputNbAdulte" class="col-md-2 col-form-label font-weight-bold">Nombre d'adulte</label>
                 <div class="col-md-2">
-                    <input type="number" class="form-control" value="<?= $leClient["CLI_NBADULTE"]?>" id="inputNbAdulte" name="donnees[nombreAdulte]" autocomplete="off" required>
+                    <input type="number" class="form-control" value="<?= $leClient["CLI_NBADULTE"] ?>" id="inputNbAdulte" name="donnees[nombreAdulte]" autocomplete="off" required>
                 </div>
 
                 <label for="inputNbEnfant" class="col-md-2 col-form-label font-weight-bold">Nombre d'enfant</label>
                 <div class="col-md-2">
-                    <input type="number" class="form-control" value="<?= $leClient["CLI_NBENFANT"]?>" id="inputNbEnfant" name="donnees[nombreEnfant]" autocomplete="off" required>
+                    <input type="number" class="form-control" value="<?= $leClient["CLI_NBENFANT"] ?>" id="inputNbEnfant" name="donnees[nombreEnfant]" autocomplete="off" required>
                 </div>
 
                 <label for="inputTypeFamille" class="col-md-2 col-form-label font-weight-bold">Taille de la
                     famille</label>
                 <div class="col-md-2">
                     <select class="form-control" name="donnees[tailleFamille]" autocomplete="off" required>
-                        <option value="1">Petite famille</option>
-                        <option value="2">Moyenne famille</option>
-                        <option value="3">Grande famille</option>
+                        <option value="1" <?= $leClient["CLI_TAILLEFAMILLE"] == 1 ? "selected" : "" ?>>Petite famille</option>
+                        <option value="2" <?= $leClient["CLI_TAILLEFAMILLE"] == 2 ? "selected" : "" ?>>Moyenne famille</option>
+                        <option value="3" <?= $leClient["CLI_TAILLEFAMILLE"] == 3 ? "selected" : "" ?>>Grande famille</option>
                     </select>
                 </div>
             </div>
@@ -210,43 +240,43 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Aide sociale</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_AIDESOC"]?>" id="inputAideSociale" name="donnees[aideSociale]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_AIDESOC"] ?>" id="inputAideSociale" name="donnees[aideSociale]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Chômage / CSST</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_CHOMAGE"]?>" id="inputAideSociale" name="donnees[chomageCSST]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_CHOMAGE"] ?>" id="inputAideSociale" name="donnees[chomageCSST]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Prêts et bourses</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_PRETBOURSE"]?>" id="inputAideSociale" name="donnees[pretBourse]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_PRETBOURSE"] ?>" id="inputAideSociale" name="donnees[pretBourse]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Pension</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_PENSION"]?>" id="inputAideSociale" name="donnees[pension]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_PENSION"] ?>" id="inputAideSociale" name="donnees[pension]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Autres</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_REVENUSAUTRES"]?>" id="inputAideSociale" name="donnees[revenusAutres]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_REVENUSAUTRES"] ?>" id="inputAideSociale" name="donnees[revenusAutres]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Total</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_REVENUSTOTAL"]?>" id="inputAideSociale" name="donnees[revenusTotal]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_REVENUSTOTAL"] ?>" id="inputAideSociale" name="donnees[revenusTotal]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Référé par</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_REFERENCE"]?>" id="inputAideSociale" name="donnees[refererPar]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_REFERENCE"] ?>" id="inputAideSociale" name="donnees[refererPar]" autocomplete="off" required>
                         </div>
                     </div>
                 </div>
@@ -259,38 +289,38 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Loyer</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_LOYER"]?>" id="inputAideSociale" name="donnees[loyer]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_LOYER"] ?>" id="inputAideSociale" name="donnees[loyer]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Electricité /
                             chauffage</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_ELEC"]?>" id="inputAideSociale" name="donnees[electriciteChauffage]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_ELEC"] ?>" id="inputAideSociale" name="donnees[electriciteChauffage]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Assurances</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_ASSURANCE"]?>" id="inputAideSociale" name="donnees[assurances]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_ASSURANCE"] ?>" id="inputAideSociale" name="donnees[assurances]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Téléphone</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_DEPTEL"]?>" id="inputAideSociale" name="donnees[telDepense]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_DEPTEL"] ?>" id="inputAideSociale" name="donnees[telDepense]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Autres</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_DEPAUTRE"]?>" id="inputAideSociale" name="donnees[depensesAutres]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_DEPAUTRE"] ?>" id="inputAideSociale" name="donnees[depensesAutres]" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputAideSociale" class="col-md-4 col-form-label mb-1">Total</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="<?= $leClient["CLI_DEPTOTAL"]?>" id="inputAideSociale" name="donnees[depensesTotal]" autocomplete="off" required>
+                            <input type="text" class="form-control" value="<?= $leClient["CLI_DEPTOTAL"] ?>" id="inputAideSociale" name="donnees[depensesTotal]" autocomplete="off" required>
                         </div>
                     </div>
                 </div>
@@ -363,8 +393,8 @@ if(isset($_GET["cid"]) && $_GET["cid"] != null && is_numeric($_GET["cid"]) && $_
                 <div class="col-md-6">
                     <div class="row">
                         <label for="inputDateAccept" class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-4">
-                            <input type="date" class="form-control" value="<?= date('d-m-Y', strtotime($leClient["CLI_DATESIGN"]))?>" id="inputDateAccept" name="donnees[dateSignature]" autocomplete="off" required>
+                        <div class="col-md-6">
+                            <input type="date" class="form-control" value="<?= date('d-m-Y', strtotime($leClient["CLI_DATESIGN"])) ?>" id="inputDateAccept" name="donnees[dateSignature]" autocomplete="off" required>
                         </div>
                     </div>
                 </div>

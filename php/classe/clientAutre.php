@@ -2,7 +2,7 @@
 
 class clientAutre
 {
-
+    private $_IdClientAutre;
     private $_NomPrenom;
     private $_DateNaissance;
     private $_Lien;
@@ -45,6 +45,20 @@ class clientAutre
         $requete = $connection->prepare("INSERT INTO `t_clientautre` (`CLI_ID`, `CLIA_NOMPRENOM`, `CLIA_DDN`, `CLIA_LIEN`) value (:idClient, :nomPrenom, :ddn, :lien)");
 
         $requete->bindValue(":idClient", $idClient);
+        $requete->bindValue(":nomPrenom", $this->_NomPrenom);
+        $requete->bindValue(":ddn", $this->_DateNaissance);
+        $requete->bindValue(":lien", $this->_Lien);
+
+        $requete->execute();
+    }
+
+    public function ModifierClientAutre()
+    {
+        $connection = ConnexionBD::getConnexion();
+
+        $requete = $connection->prepare("UPDATE `t_clientautre` SET `CLIA_NOMPRENOM`=:nomPrenom,`CLIA_DDN`=:ddn,`CLIA_LIEN`=:lien WHERE `CLIA_ID`=:idClient");
+
+        $requete->bindValue(":idClient", $this->_IdClientAutre);
         $requete->bindValue(":nomPrenom", $this->_NomPrenom);
         $requete->bindValue(":ddn", $this->_DateNaissance);
         $requete->bindValue(":lien", $this->_Lien);

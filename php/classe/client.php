@@ -86,6 +86,7 @@ class Client{
     }
 
 
+    //Ajoute le client dans la base
     public function AjouterClient()
     {
         $connection = ConnexionBD::getConnexion();
@@ -124,6 +125,76 @@ class Client{
         $requete->execute();
     }
 
+    //Modification du client
+    public function ModifierClient()
+    {
+        $connection = ConnexionBD::getConnexion();
+
+        $requete = $connection->prepare("UPDATE`t_client`
+        SET
+            `CLI_DATE` = :date,
+            `CLI_NOM` = :nomBeneficiaire,
+            `CLI_PRENOM` = :prenomBeneficiaire,
+            `CLI_AGE` = :ageBeneficiaire,
+            `CLI_ADRESSE` = :adresse,
+            `CLI_VILLE` = :ville,
+            `CLI_CP` = :codePostal,
+            `CLI_TEL` = :tel,
+            `CLI_NBADULTE` = :nombreAdulte,
+            `CLI_NBENFANT` = :nombreEnfant,
+            `CLI_TAILLEFAMILLE` = :tailleFamille,
+            `CLI_AIDESOC` = :aideSociale,
+            `CLI_CHOMAGE` = :chomage,
+            `CLI_PRETBOURSE` = :pretBourse,
+            `CLI_PENSION` = :pension,
+            `CLI_REVENUSAUTRES` = :revenusAutres,
+            `CLI_REVENUSTOTAL` = :revenusTotal,
+            `CLI_REFERENCE` = :reference,
+            `CLI_LOYER` = :loyer,
+            `CLI_ELEC` = :electricite,
+            `CLI_ASSURANCE` = :assurance,
+            `CLI_DEPTEL` = :depensesTel,
+            `CLI_DEPAUTRE` = :depensesAutres,
+            `CLI_DEPTOTAL` = :depensesTotal,
+            `CLI_AIDEALIM` = :aideAlimentaire,
+            `CLI_BENEVOLAT` = :benevolat,
+            `CLI_SIGNATURE` = :signature,
+            `CLI_DATESIGN` = :dateSignature
+        WHERE `CLI_ID` = $this->_IdClient");
+
+        $requete->bindValue(":date", $this->_Date);
+        $requete->bindValue(":nomBeneficiaire", $this->_NomBeneficicaire);
+        $requete->bindValue(":prenomBeneficiaire", $this->_PrenomBeneficiaire);
+        $requete->bindValue(":ageBeneficiaire", $this->_AgeBeneficiaire);
+        $requete->bindValue(":adresse", $this->_Adresse);
+        $requete->bindValue(":ville", $this->_Ville);
+        $requete->bindValue(":codePostal", $this->_CodePostal);
+        $requete->bindValue(":tel", $this->_Tel);
+        $requete->bindValue(":nombreAdulte", $this->_NombreAdulte);
+        $requete->bindValue(":nombreEnfant", $this->_NombreEnfant);
+        $requete->bindValue(":tailleFamille", $this->_TailleFamille);
+        $requete->bindValue(":aideSociale", $this->_AideSociale);
+        $requete->bindValue(":chomage", $this->_Chomage);
+        $requete->bindValue(":pretBourse", $this->_PretBourse);
+        $requete->bindValue(":pension", $this->_Pension);
+        $requete->bindValue(":revenusAutres", $this->_RevenusAutres);
+        $requete->bindValue(":revenusTotal", $this->_RevenusTotal);
+        $requete->bindValue(":reference", $this->_Reference);
+        $requete->bindValue(":loyer", $this->_Loyer);
+        $requete->bindValue(":electricite", $this->_Electricite);
+        $requete->bindValue(":assurance", $this->_Assurance);
+        $requete->bindValue(":depensesTel", $this->_DepensesTel);
+        $requete->bindValue(":depensesAutres", $this->_DepensesAutres);
+        $requete->bindValue(":depensesTotal", $this->_DepensesTotal);
+        $requete->bindValue(":aideAlimentaire", $this->_AideAlimentaire);
+        $requete->bindValue(":benevolat", $this->_Benevolat);
+        $requete->bindValue(":signature", $this->_Signature);
+        $requete->bindValue(":dateSignature", $this->_DateSignature);
+
+        $requete->execute();
+    }
+
+    //Récup le nom et le prénom de tous les clients
     public static function SelectClient()
     {
         $connection = ConnexionBD::getConnexion();
@@ -134,5 +205,16 @@ class Client{
 
         return $resultat;
     }
+
+    //Get tous les clients autre du client
+    public function GetClientsAutre()
+    {
+        $connection = ConnexionBD::getConnexion();
+
+        $requete = $connection->query("SELECT * FROM t_clientautre WHERE CLI_ID = $this->_IdClient");
+        
+        $resultat = $requete->fetchAll();
+
+        return $resultat;
+    }
 }
-?>

@@ -1,5 +1,4 @@
 <?php
-
 include('classConnexionBD.php');
 
 if(isset($_POST['Valider']))
@@ -71,32 +70,38 @@ if(isset($_POST['Valider']))
 
         if($result1 == 0 || $result2 == 0 || $result3 == 0 || $result4 == 0)
         {
-            header("Location: ../ajoutClient.php?erreur=2");
+            header("Location: ../detailsClient.php?erreur=2");
         }
         else
         {
             $client = new Client($date, $nomBeneficiaire, $prenomBeneficiaire, $age, $adresse, $ville, $codePostal, $tel, $nombreAdulte, $nombreEnfant, $tailleFamille, $aideSociale, $chomage, $pretBourse, $pension, $revenusAutres, $revenusTotal, $reference, $loyer, $electricite, $assurances, $telDepense, $depensesAutres, $depensesTotal, $aideAlimentaire, $benevole, $signature, $dateSignature);
+            
+            $idClient = $_GET["cid"];
+            $client->__set("_IdClient", $idClient);
 
-            $client->AjouterClient();
+            $client->ModifierClient();
+
+            //Récup les membre de la famille du client pour les modifier
+            $autres = $client->GetClientsAutre();
 
             if($result1 == 1)
-                ajouterAutre($clientAutre1);
+                modifierAutre($clientAutre1, $autres[0]["CLIA_ID"]);
 
             if($result2 == 1)
-                ajouterAutre($clientAutre2);
+                modifierAutre($clientAutre2, $autres[1]["CLIA_ID"]);
             
             if($result3 == 1)
-                ajouterAutre($clientAutre3);
+                modifierAutre($clientAutre3, $autres[2]["CLIA_ID"]);
             
             if($result4 == 1)
-                ajouterAutre($clientAutre4);
+                modifierAutre($clientAutre4, $autres[3]["CLIA_ID"]);
 
-            header("Location: ../ajoutClient.php?success=1");
+            header("Location: ../listeModifClient.php?success=1");
         }
     }
     else
     {
-        header("Location: ../ajoutClient.php?erreur=1");
+        header("Location: ../detailsClient.php?erreur=1");
     }
 }
 
@@ -156,5 +161,17 @@ function ajouterAutre($tableau)
     $clientAutre = new clientAutre($nomPrenom, $ddn, $lien);
 
     $clientAutre->AjouterClientAutre($idClient);
+}
+
+function modifierAutre($tableau, $idAutre)
+{
+    $nomPrenom = $tableau["nomPrenom"];
+    $ddn = $tableau["ddn"];
+    $lien = $tableau["lien"];
+
+    $clientAutre = new clientAutre($nomPrenom, $ddn, $lien);
+    $clientAutre->__set("_IdClientAutre", $idAutre);
+
+    $clientAutre->ModifierClientAutre();
 }
 ?>

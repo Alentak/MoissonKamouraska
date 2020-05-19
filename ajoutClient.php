@@ -21,8 +21,7 @@
             <a href="index.html"><img src="img/Logo_MoissonKam.png" alt="logo"></a>
             <h1>Ajout client</h1>
         </div>
-    </header>
-
+</header>
     <?php
         if(isset($_GET["erreur"]))
         {
@@ -60,9 +59,7 @@
             <?php
             }
         }
-
     ?>
-
     <div class="container">
         <form method="POST" action="php/ajoutClient.php">
             <h2>Fiche d'inscription</h2>
@@ -147,7 +144,7 @@
                 </div>
 
 
-                <div class="col-md-2 mb-3">
+                <div class="col-md-3 mb-3">
                     <div class="row">
                         <label for="inputNomPrenomAutre" class="col-md-12 col-form-label font-weight-bold">Date de
                             naissance</label>
@@ -174,7 +171,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <div class="row">
                         <label for="inputNomPrenomAutre" class="col-md-12 col-form-label font-weight-bold">Lien</label>
                     </div>
@@ -388,7 +385,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <label for="inputDateAccept" class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <input type="date" class="form-control" id="inputDateAccept" name="donnees[dateSignature]" autocomplete="off" required>
                         </div>
                     </div>
