@@ -2,7 +2,7 @@
 include 'php/classConnexionBD.php';
 
 $db = ConnexionBD::getConnexion();
-$clients = $db->query("SELECT * FROM t_client");
+$clients = $db->query("SELECT * FROM t_client ORDER BY CLI_NOM");
 ?>
 
 <!DOCTYPE html>

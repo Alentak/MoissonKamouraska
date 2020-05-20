@@ -8,7 +8,7 @@ $ListeProduit = array();
 
 //Ordre de selection de tout les groupes a qui on peut faire une distribution
 
-$selectClient = $bdd->query('SELECT CLI_ID, CLI_NOM, CLI_PRENOM, CLI_TAILLEFAMILLE FROM t_client ORDER BY CLI_NOM');
+$selectClient = $bdd->query('SELECT CLI_ID, CLI_NOM, CLI_PRENOM, CLI_TAILLEFAMILLE FROM t_client WHERE CLI_DATE > CURDATE() ORDER BY CLI_NOM');
 
 $ListeProduit[0] = array();
 
