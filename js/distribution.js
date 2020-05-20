@@ -50,7 +50,6 @@ $(document).ready(function () {
             pourcentMoisson = parseInt(jObjInventaire[1][i][0].PourcentMoisson, 10);
             pourcent = parseInt(jObjInventaire[1][i][0].Prio[PrioG - 1], 10);
             nbIndice = parseInt(jObjInventaire[1][i][0].NbProduit, 10);
-            $('#indiceProduit').text(Math.round(pourcent * (nbIndice - (nbIndice * pourcentMoisson / 100))) / 100);
         }
 
     }
@@ -224,7 +223,7 @@ $(document).ready(function () {
 
             caption(poidsTotal, prixTotal);
 
-            $("#tbodyDis").append('<tr><td>' + $("#nomProduit option:selected").text() + '</td> <td>' + $("#nbProduit").val() + '</td><td>' + $('#indiceProduit').text() + '</td><td>' + $("#PoidsProduit").text() + '</td> <td>' + $("#PrixProduit").text() + '</td><td name="supp"><i class="fas fa-trash-alt fa-2x"></i></td></tr>');
+            $("#tbodyDis").append('<tr><td>' + $("#nomProduit option:selected").text() + '</td> <td>' + $("#nbProduit").val() + '</td><td>' + $("#PoidsProduit").text() + '</td> <td>' + $("#PrixProduit").text() + '</td><td name="supp"><i class="fas fa-trash-alt fa-2x"></i></td></tr>');
 
             $("#distribForm")[0].reset();
             $("#PoidsProduit").text("0");
