@@ -45,7 +45,7 @@ function calculPrix()
     }
 
     //Prix = nombre de produits * prix unitaire du produit
-    $("#PrixProduit").text("$"+Math.round($("#nbProduit").val() * jObjProduitGroupe[0][i].TPR_Prix*10)/10);
+    $("#PrixProduit").text(Math.round($("#nbProduit").val() * jObjProduitGroupe[0][i].TPR_Prix*10)/10);
 }
 
 function majPoidsPrix()
