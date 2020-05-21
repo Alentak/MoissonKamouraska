@@ -29,8 +29,8 @@ function affichage(p_Json){
     }
     else{
         for (let index = 0; index < p_Json.length; index++) {
-            $('#tabHistorique').append('<tr><td>'+p_Json[index].tpr_libelle+'</td><td>'+p_Json[index].HIS_NbProduit+'</td><td>'+p_Json[index].HIS_PoidsUnitaire+'</td><td>'+Math.round(p_Json[index].prix*100)/100 +'</td></tr>')
-            poidstotal += parseFloat(p_Json[index].HIS_PoidsUnitaire,10)*parseFloat(p_Json[index].HIS_NbProduit,10);
+            $('#tabHistorique').append('<tr><td>'+p_Json[index].tpr_libelle+'</td><td>'+p_Json[index].nb+'</td><td>'+p_Json[index].Poids+'</td><td>'+Math.round(p_Json[index].prix*100)/100 +'</td></tr>')
+            poidstotal += parseFloat(p_Json[index].Poids,10)*parseFloat(p_Json[index].nb,10);
             prixtotal += parseFloat(p_Json[index].prix,10);
         }
         $('#groupeSelect').text("Groupe : "+$('#optionsGroupe  option:selected').text());
@@ -105,7 +105,7 @@ $('#printChart').click(function () {
             'php/getStatistiquesArrivage.php', 
             {
                 GRO_ID : $('#optionsGroupe option:selected').val(),
-                HIS_Date : $('#optionsDate').val()
+                LOT_Date : $('#optionsDate').val()
             },
             function(data){
                 jObjHistorique = JSON.parse(data);
